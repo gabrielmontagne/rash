@@ -10,7 +10,7 @@ def run(stdscr):
 
     stdscr.clear()
 
-    for i in range(1000):
+    for i in range(args.length):
         stdscr.addstr(0, 1, str(i) * 10)
         a = stdscr.get_wch()
         args.outfile.write(a)
@@ -25,13 +25,17 @@ def main():
     parser = ArgumentParser()
     parser.add_argument(
         'outfile',
-        type=FileType('w')
+        type=FileType('a')
     )
+    parser.add_argument('--length', type=int, default=10000)
     args = parser.parse_args()
     try:
         wrapper(run)
     except KeyboardInterrupt:
-        print('ciao.')
+        pass
+
+    print('ciao')
+
 
 if __name__ == '__main__':
     main()
