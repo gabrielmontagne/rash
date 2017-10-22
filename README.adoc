@@ -1,3 +1,6 @@
 = rash
 Gabriel Montagné Láscaris-Comneno <gabriel@tibas.london>
 v0.0.1
+
+type into a file, one character at a time.
+Ctrl+C to finish.
