@@ -2,5 +2,10 @@
 Gabriel Montagné Láscaris-Comneno <gabriel@tibas.london>
 v0.0.1
 
-type into a file, one character at a time.
+Tiny script to type into a file, one character at a time, no editing, no rewind.
 Ctrl+C to finish.
+
+You'll need Python. Install, as usual,
+`python setup.py install`
+
+Then, `rash --help`.
