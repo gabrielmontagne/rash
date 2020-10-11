@@ -27,7 +27,7 @@ def main():
         'outfile',
         type=FileType('a')
     )
-    parser.add_argument('--length', type=int, default=10000)
+    parser.add_argument('-l', '--length', type=int, default=10000)
     args = parser.parse_args()
     try:
         wrapper(run)
