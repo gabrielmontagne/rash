@@ -14,6 +14,7 @@ def run(stdscr):
         stdscr.addstr(0, 1, str(i) * 10)
         a = stdscr.get_wch()
         args.outfile.write(a)
+        args.outfile.flush()
         stdscr.addstr(1, 1, a * 10)
         beep()
 
