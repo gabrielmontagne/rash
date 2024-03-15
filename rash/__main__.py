@@ -7,6 +7,7 @@ args = None
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 click_sound_path = os.path.join(script_dir, 'click.wav')
+end_sound_path = os.path.join(script_dir, 'end.wav')
 
 def run(stdscr):
     stdscr.clear()
@@ -20,7 +21,6 @@ def run(stdscr):
         char_count += 1
 
         if char_count % args.click_interval == 0:
-            # Play the click sound located next to the script
             playsound(click_sound_path, block=False)
 
 def main():
@@ -40,7 +40,7 @@ def main():
     except KeyboardInterrupt:
         pass
 
-    print('ciao')
+    playsound(end_sound_path, block=False)
 
 if __name__ == '__main__':
     main()
