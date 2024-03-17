@@ -16,9 +16,14 @@ def ts():
 
 def run(stdscr):
     stdscr.clear()
+
     char_count = 0
 
+    if args.prompt:
+        stdscr.addstr(3, 1, args.prompt)
+
     args.outfile.write(ts())
+
     playsound(click_sound_path, block=False)
 
     for i in range(args.length):
@@ -47,6 +52,7 @@ def main():
     parser.add_argument('-l', '--length', type=int, default=10000)
     parser.add_argument('-c', '--click-interval', type=int, default=50)
     parser.add_argument('-t', '--timestamp-interval', type=int, default=1000)
+    parser.add_argument('-p', '--prompt', type=str, default=None)
 
     args = parser.parse_args()
     try:
