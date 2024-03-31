@@ -3,6 +3,7 @@ from argparse import ArgumentParser, FileType
 from curses import wrapper
 from playsound import playsound
 from datetime import datetime
+import logging
 
 args = None
 
@@ -31,6 +32,15 @@ def run(stdscr):
     char_count = 0
     while True:
         a = stdscr.get_wch()
+
+        if not isinstance(a, str):
+            logging.debug(f'Got non strin {a}; skipping')
+            continue
+
+        if a == '\x04':  # Check for Ctrl+D (ASCII character '\x04')
+            logging.debug('EOD Ctrl+D')
+            break
+
         args.outfile.write(a)
         args.outfile.flush()
         stdscr.addstr(1, 1, a)
