@@ -34,7 +34,7 @@ def run(stdscr):
         a = stdscr.get_wch()
 
         if not isinstance(a, str):
-            logging.debug(f'Got non strin {a}; skipping')
+            logging.debug(f'Got non string {a}; skipping')
             continue
 
         if a == '\x04':  # Check for Ctrl+D (ASCII character '\x04')
