@@ -21,6 +21,7 @@ def run(stdscr):
 
     start_time = datetime.now()
     time_limit = args.minutes * 60 if args.minutes else None
+    char_limit = args.length
 
     if args.prompt:
         stdscr.addstr(3, 1, args.prompt)
@@ -52,7 +53,7 @@ def run(stdscr):
         if char_count % args.click_interval == 0:
             playsound(click_sound_path, block=False)
 
-        if char_count >= args.length:
+        if char_limit and char_count >= char_limit:
             break
 
         if time_limit and (datetime.now() - start_time).total_seconds() >= time_limit:
@@ -69,7 +70,7 @@ def main():
         'outfile',
         type=FileType('a')
     )
-    parser.add_argument('-l', '--length', type=int, default=10000)
+    parser.add_argument('-l', '--length', type=int, default=None)
     parser.add_argument('-m', '--minutes', type=int, default=None)
     parser.add_argument('-c', '--click-interval', type=int, default=50)
     parser.add_argument('-t', '--timestamp-interval', type=int, default=1000)
