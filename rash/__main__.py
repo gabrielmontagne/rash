@@ -36,9 +36,10 @@ def run(stdscr):
     char_limit = args.length
 
     char_y, char_x, prompt_y, prompt_x = get_positions(stdscr, args.center)
+    prompt_index = 0
 
     if args.prompt:
-        stdscr.addstr(prompt_y, prompt_x, args.prompt)
+        stdscr.addstr(prompt_y, prompt_x, args.prompt[0])
 
     args.outfile.write(ts())
 
@@ -68,6 +69,12 @@ def run(stdscr):
 
         if char_count % args.timestamp_interval == 0:
             args.outfile.write(ts())
+            if args.prompt:
+                prompt_index = (prompt_index + 1) % len(args.prompt)
+                _, _, prompt_y, prompt_x = get_positions(stdscr, args.center)
+                stdscr.move(prompt_y, prompt_x)
+                stdscr.clrtoeol()
+                stdscr.addstr(prompt_y, prompt_x, args.prompt[prompt_index])
 
         if char_count % args.click_interval == 0 and not args.quiet:
             playsound(click_sound_path, block=False)
@@ -89,7 +96,7 @@ def main():
     parser.add_argument("-m", "--minutes", type=int, default=None)
     parser.add_argument("-c", "--click-interval", type=int, default=50)
     parser.add_argument("-t", "--timestamp-interval", type=int, default=1000)
-    parser.add_argument("-p", "--prompt", type=str, default=None)
+    parser.add_argument("-p", "--prompt", type=str, action="append", default=[])
     parser.add_argument("-C", "--center", action="store_true", default=False)
     parser.add_argument("-q", "--quiet", action="store_true", default=False)
 
