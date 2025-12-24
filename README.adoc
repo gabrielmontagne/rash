@@ -2,10 +2,65 @@
 Gabriel Montagné Láscaris-Comneno <gabriel@tibas.london>
 v0.0.1
 
-Tiny script to type into a file, one character at a time, no editing, no rewind.
-Ctrl+C to finish.
+A typewriter for the terminal. One character at a time, no editing, no backspace, no rewind.
 
-You'll need Python. Install, as usual,
-`python setup.py install`
+== Why
 
-Then, `rash --help`.
+Sometimes the inner editor needs to shut up. Rash forces forward motion: you type, it writes, that's it. Good for morning pages, freewriting, or any practice where the point is to keep going.
+
+== Install
+
+You'll need Python 3. Then:
+
+```
+pip install -r requirements.txt
+python setup.py install
+```
+
+== Usage
+
+```
+rash outfile.txt
+```
+
+Type away. Ctrl+D or Ctrl+C to finish.
+
+== Options
+
+`-l, --length N`::
+  Stop after N characters.
+
+`-m, --minutes N`::
+  Stop after N minutes.
+
+`-c, --click-interval N`::
+  Play a click sound every N characters (default: 50).
+
+`-t, --timestamp-interval N`::
+  Insert a timestamp every N characters (default: 1000).
+
+`-p, --prompt TEXT`::
+  Show a prompt below the cursor. Can be repeated; prompts rotate on each timestamp.
+
+`-C, --center`::
+  Display the current character centered on screen.
+
+`-q, --quiet`::
+  No sounds.
+
+== Examples
+
+Timed 10-minute session:
+```
+rash -m 10 morning.txt
+```
+
+750 words (roughly 3750 chars) with rotating prompts, quiet:
+```
+rash -l 3750 -q -p "keep going" -p "don't stop" -p "what else?" draft.txt
+```
+
+Centered, meditative mode:
+```
+rash -C -c 1 journal.txt
+```
