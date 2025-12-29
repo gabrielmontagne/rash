@@ -1,7 +1,7 @@
 import os
 from argparse import ArgumentParser, FileType
 from curses import wrapper
-from playsound import playsound
+from playsound3 import playsound
 from datetime import datetime
 import logging
 

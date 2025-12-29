@@ -1,5 +1,1 @@
-nose
-bumpversion
-pep8
-pylint
-playsound
+playsound3
