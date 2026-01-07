@@ -1,7 +1,7 @@
 import os
+import subprocess
 from argparse import ArgumentParser, FileType
 from curses import wrapper
-from playsound3 import playsound
 from datetime import datetime
 import logging
 
@@ -10,6 +10,10 @@ args = None
 script_dir = os.path.dirname(os.path.realpath(__file__))
 click_sound_path = os.path.join(script_dir, "click.wav")
 end_sound_path = os.path.join(script_dir, "end.wav")
+
+
+def play(path):
+    subprocess.Popen(["paplay", path])
 
 
 def ts():
@@ -44,7 +48,7 @@ def run(stdscr):
     args.outfile.write(ts())
 
     if not args.quiet:
-        playsound(click_sound_path, block=False)
+        play(click_sound_path)
 
     char_count = 0
     while True:
@@ -77,7 +81,7 @@ def run(stdscr):
                 stdscr.addstr(prompt_y, prompt_x, args.prompt[prompt_index])
 
         if char_count % args.click_interval == 0 and not args.quiet:
-            playsound(click_sound_path, block=False)
+            play(click_sound_path)
 
         if char_limit and char_count >= char_limit:
             break
@@ -107,7 +111,7 @@ def main():
         pass
 
     if not args.quiet:
-        playsound(end_sound_path, block=False)
+        play(end_sound_path)
 
 
 if __name__ == "__main__":
